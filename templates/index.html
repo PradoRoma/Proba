@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}index{% endblock title%}
+{% block header %}Главная{% endblock header %}
+{% block content %}Тут все о главной странице{% endblock content %}
+
+{% block forms %}
+<h2>Данные нулевого пользователя</h2>
+<form method="POST" novalidate>
+    {% csrf_token %}
+    <div>
+    {% for field in form %}
+    <div class="form-group">
+        {{field.label_tag}}
+        <div>{{field}}</div>
+        {% if field.errors %}
+        {% for error in field.errors %}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endfor %}
+    <!--{% for error in field.error %}
+       <div class = "alert alert-danger">{{error}}</div>
+    {% endfor %}-->
+    </div>
+    <input type="submit" value="Send" >
+</form>
+<h2>Данные первого пользователя</h2>
+<form method="POST">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Send" >
+</form>
+<h2>Данные второго пользователя</h2>
+<form method="POST">
+    {% csrf_token %}
+    <ul>
+    {{ form.as_ul }}
+    </ul>
+    <input type="submit" value="Send" >
+</form>
+<h2>Данные третьего пользователя</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div>
+    {{ form.as_p }}
+    </div>
+    <input type="submit" value="Send" >
+</form>
+
+{% endblock forms %}
+
+{% block data %}
+<h1>{{ header }}</h1>
+<p>Name: {{user.name}}  Age: {{user.age}}</p>
+<p>Address: ул. {{address.0}}, д.{{address.1}}, кв.{{address.2}}</p>
+<p>Langs: {{langs.0}}, {{langs.1}}</p>
+{% endblock data %}

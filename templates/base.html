@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <title>{% block title %} Django Forms {% endblock title %}</title>
+    <style>
+    .alert{color: red}
+    .myfield{
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        width: 250px;
+        margin: 5px 30px 15px 0;
+    }
+    </style>
+</head>
+<body class="container">
+    <h1>{% block header %}{% endblock header %}</h1>
+    <div>{% block content %}{% endblock content %}</div>
+    <div>{% block forms %}{% endblock forms %}</div>
+    <div>{% block data %}{% endblock data %}</div>
+    <h1>Another image</h1>
+    <img src="{% static "C:/pythonvs/base/static/images/kamni.jpeg" %}" alt="Stones along the river" >
+    <div>Конец первой части кода</div>
+
+    <p>{% now "j F Y A" %}</p>
+    <p>{% now "j N Y P e" %}</p>
+    <p>{% now "r" %}</p>
+
+    {% if n > 0 %}
+        <p>Число положительное</p>
+    {% elif n < 0 %}
+        <p>Число отрицательное</p>
+    {% else %}
+        <p>Число равно нулю</p>
+    {% endif %}
+
+    <p>Список языков:</p>
+    <ul>
+        {% for lan in langs %}
+        <li>{{ lan }}</li>
+        {% empty %}
+        <li>Langs array is empty</li>
+        {% endfor %}
+    </ul>
+
+    {% with name="Roma" age=30 %}
+        <div>
+            <p>Name: {{ name }}</p>
+            <p>Age: {{ age }}</p>
+        </div>
+    {% endwith %}
+
+    <div>Конец второй части кода</div>
+
+</body>
+</html>
